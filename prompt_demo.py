@@ -21,7 +21,7 @@ def get_completion(prompt, model="llama3"):
     )
     return response.choices[0].message.content
 
-#Example usage
+# --- Tactic 1 - Using delimiters ---
 text = f"""
 You should express what you want a model to do by \
 providing instructions that are as clear and \
@@ -38,6 +38,16 @@ prompt = f"""
 Summarize the text delimited by triple backticks \
 into a single sentence.
 ```{text}```
+"""
+response = get_completion(prompt)
+print(response)
+
+# --- Tactic 2 - Ask for a structured output ---
+prompt = f"""
+Generate a list of three made-up book titles along \
+with their authors and genres.
+Provide them in JSON format with the following keys:
+book_id, title, author, genre.
 """
 response = get_completion(prompt)
 print(response)
