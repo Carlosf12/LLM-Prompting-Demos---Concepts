@@ -27,7 +27,7 @@ def get_completion(prompt, model="llama3"):
 # 1 = Tactic 1 (Delimiters)
 # 2 = Tactic 2 (Structured Output)
 # 3 = Tactic 3 (Conditional Logic)
-demo_tactic = 3
+demo_tactic = 4
 
 # --- Prompting Principles Demos ---
 
@@ -135,4 +135,21 @@ then simply write "No steps provided."
 """
     response = get_completion(prompt)
     print("Completion for Text 2:")
+    print(response)
+elif demo_tactic == 4:
+    print("--- Running Tactic 4: Few-shot Prompting ---")
+    
+    prompt = f"""
+Your task is to answer in a consistent style.
+
+<child>: Teach me about patience.
+
+<grandparent>: The river that carves the deepest \
+valley flows from a modest spring; the \
+grandest symphony originates from a single note; \
+the most intricate tapestry begins with a solitary thread.
+
+<child>: Teach me about resilience.
+"""
+    response = get_completion(prompt)
     print(response)
