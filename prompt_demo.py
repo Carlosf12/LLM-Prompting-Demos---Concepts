@@ -1,6 +1,6 @@
 import openai
 import os
-import json # You'll need this to handle the JSON output
+import json
 from dotenv import load_dotenv, find_dotenv
 
 # Load the API key from the .env file
@@ -8,8 +8,8 @@ _ = load_dotenv(find_dotenv())
 
 # Initialize the OpenAI client, but point it to the local Ollama server
 client = openai.OpenAI(
-    base_url = 'http://localhost:11434/v1',
-    api_key = 'ollama', # This can be a dummy key as it's not used by Ollama
+    base_url='http://localhost:11434/v1',
+    api_key='ollama',  # This can be a dummy key as it's not used by Ollama
 )
 
 # Define the helper function
@@ -27,7 +27,10 @@ def get_completion(prompt, model="llama3"):
 # 1 = Tactic 1 (Delimiters)
 # 2 = Tactic 2 (Structured Output)
 # 3 = Tactic 3 (Conditional Logic)
-demo_tactic = 5
+# 4 = Tactic 4 (Few-shot Prompting)
+# 5 = Principle 2 - Tactic 1 (Specify steps)
+# 6 = Principle 2 - Tactic 2 (Work out solution first)
+demo_tactic = 6
 
 # --- Prompting Principles Demos ---
 
@@ -63,8 +66,6 @@ book_id, title, author, genre.
 """
     response = get_completion(prompt)
     print(response)
-
-    # You can also parse the JSON to prove it's valid
     try:
         data = json.loads(response)
         print("\nSuccessfully parsed JSON output:")
@@ -74,7 +75,6 @@ book_id, title, author, genre.
         
 elif demo_tactic == 3:
     print("--- Running Tactic 3: Conditional Logic ---")
-    
     text_1 = f"""
 Making a cup of tea is easy! First, you need to get some \
 water boiling. While that's happening, \
@@ -104,9 +104,7 @@ then simply write "No steps provided."
     response = get_completion(prompt)
     print("Completion for Text 1:")
     print(response)
-
-    print("-" * 20) # Separator for clarity
-
+    print("-" * 20)
     text_2 = f"""
 The sun is shining brightly today, and the birds are \
 singing. It's a beautiful day to go for a \
@@ -136,9 +134,9 @@ then simply write "No steps provided."
     response = get_completion(prompt)
     print("Completion for Text 2:")
     print(response)
+
 elif demo_tactic == 4:
     print("--- Running Tactic 4: Few-shot Prompting ---")
-    
     prompt = f"""
 Your task is to answer in a consistent style.
 
@@ -153,10 +151,10 @@ the most intricate tapestry begins with a solitary thread.
 """
     response = get_completion(prompt)
     print(response)
+
 elif demo_tactic == 5:
     print("--- Running Principle 2: Give the model time to 'think' ---")
     print("--- Tactic 1: Specify the steps required to complete a task ---")
-
     text = f"""
 In a charming village, siblings Jack and Jill set out on \
 a quest to fetch water from a hilltop \
@@ -168,7 +166,6 @@ comforting embraces. Despite the mishap, \
 their adventurous spirits remained undimmed, and they \
 continued exploring with delight.
 """
-    # example 1
     prompt_1 = f"""
 Perform the following actions:
 1 - Summarize the following text delimited by triple \
@@ -177,19 +174,14 @@ backticks with 1 sentence.
 3 - List each name in the French summary.
 4 - Output a json object that contains the following \
 keys: french_summary, num_names.
-​
 Separate your answers with line breaks.
-​
 Text:
 ```{text}```
 """
     response = get_completion(prompt_1)
     print("Completion for prompt 1:")
     print(response)
-
-    print("\n" + "=" * 20 + "\n") # Separator for clarity
-
-    # example 2
+    print("\n" + "=" * 20 + "\n")
     prompt_2 = f"""
 Your task is to perform the following actions:
 1 - Summarize the following text delimited by
@@ -198,16 +190,103 @@ Your task is to perform the following actions:
 3 - List each name in the French summary.
 4 - Output a json object that contains the
   following keys: french_summary, num_names.
-​
 Use the following format:
 Text: <text to summarize>
 Summary: <summary>
 Translation: <summary translation>
 Names: <list of names in summary>
 Output JSON: <json with summary and num_names>
-​
 Text: <{text}>
 """
     response = get_completion(prompt_2)
     print("Completion for prompt 2:")
     print(response)
+
+elif demo_tactic == 6:
+    print("--- Running Principle 2, Tactic 2: Work out solution first ---")
+    prompt_1 = f"""
+Determine if the student's solution is correct or not.
+
+Question:
+I'm building a solar power installation and I need help \
+working out the financials.
+- Land costs $100 / square foot
+- I can buy solar panels for $250 / square foot
+- I negotiated a contract for maintenance that will cost \
+me a flat $100k per year, and an additional $10 / square \
+foot
+What is the total cost for the first year of operations \
+as a function of the number of square feet.
+
+Student's Solution:
+Let x be the size of the installation in square feet.
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 100x
+Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+"""
+    response = get_completion(prompt_1)
+    print("Completion for prompt 1:")
+    print(response)
+
+    print("\n" + "=" * 20 + "\n") # Separator for clarity
+
+    prompt = f"""
+Your task is to determine if the student's solution \
+is correct or not.
+To solve the problem do the following:
+- First, work out your own solution to the problem including the final total. 
+- Then compare your solution to the student's solution \ 
+and evaluate if the student's solution is correct or not. 
+Don't decide if the student's solution is correct until 
+you have done the problem yourself.
+
+Use the following format:
+Question:
+```
+question here
+```
+Student's solution:
+```
+student's solution here
+```
+Actual solution:
+```
+steps to work out the solution and your solution here
+```
+Is the student's solution the same as actual solution \
+just calculated:
+```
+yes or no
+```
+Student grade:
+```
+correct or incorrect
+```
+
+Question:
+```
+I'm building a solar power installation and I need help \
+working out the financials. 
+- Land costs $100 / square foot
+- I can buy solar panels for $250 / square foot
+- I negotiated a contract for maintenance that will cost \
+me a flat $100k per year, and an additional $10 / square \
+foot
+What is the total cost for the first year of operations \
+as a function of the number of square feet.
+``` 
+Student's solution:
+```
+Let x be the size of the installation in square feet.
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 100x
+Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+```
+Actual solution:
+"""
+response = get_completion(prompt_2)
+print(response)
