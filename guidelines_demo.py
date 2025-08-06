@@ -2,6 +2,8 @@ import openai
 import os
 import json
 from dotenv import load_dotenv, find_dotenv
+from rich.console import Console
+from rich.panel import Panel
 
 # Load the API key from the .env file
 _ = load_dotenv(find_dotenv())
@@ -373,7 +375,7 @@ Technical specifications: ```{fact_sheet_chair}```
     response_constrained = get_completion(prompt_constrained)
     print(response_constrained)
     print(f"\nWord count: {len(response_constrained.split())}")
-    
+
     prompt_8a = f"""
 Your task is to help a marketing team create a 
 description for a retail website of a product based 
@@ -413,11 +415,23 @@ materials the product is constructed from.
 At the end of the description, include every 7-character 
 Product ID in the technical specification.
 
-Use at most 50 words.
+Format everything as HTML, that can be used in a website. Place the description in a <div> element.
 
 Technical specifications: ```{fact_sheet_chair}```
 """
-    print("--- Second Refined Prompt Output (with Product IDs) ---")
     response_8b = get_completion(prompt_8b)
-    print(response_8b)
+
+    # Use rich to save the output to an HTML file
+    console = Console(record=True)
+    
+    console.print("--- Second Refined Prompt Output (with Product IDs) ---")
+
+    # Print the formatted output to the console for recording
+    console.print(Panel(response_8b, title="Product Description for Retailers", border_style="bold green"))
+    
+    # Save the recorded console output as an HTML file
+    console.save_html("output.html")
+    
+    print("\n--- HTML output saved to output.html ---")
+    print("Open the output.html file in your browser to view.")
 
