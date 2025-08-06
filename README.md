@@ -1,6 +1,19 @@
-# LLM Prompting Principles Demo
+# LLM Prompting Demos & Concepts
 
-This repository contains a simple Python script to demonstrate key principles and tactics for effective prompt engineering with Large Language Models (LLMs). The script uses the Ollama framework to run a local `llama3` model.
+This repository contains a collection of Python scripts to demonstrate key principles and tactics for effective prompt engineering with Large Language Models (LLMs). The project is set up to use the Ollama framework to run a local `llama3` model, providing a self-contained and easy-to-use environment for learning.
+
+## Project Features
+
+* **Prompting Demos (`prompt_demo.py`)**: A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
+    1.  **Using Delimiters**: Structuring prompts to clearly separate instructions from content.
+    2.  **Structured Output**: Asking for responses in formats like JSON.
+    3.  **Conditional Logic**: Guiding the model to perform actions based on conditions.
+    4.  **Few-shot Prompting**: Providing examples to teach the model a desired style.
+    5.  **Specifying Steps**: Breaking down complex tasks for the model.
+    6.  **Working Out Solutions First**: Improving accuracy by having the model solve a problem before evaluating an answer.
+    7.  **Generating Marketing Copy**: Creating a product description from a technical fact sheet.
+
+* **Iterative Prompt Development (`iterative_prompts.py`)**: A dedicated script that demonstrates the process of iteratively refining a prompt to achieve a progressively better and more targeted output.
 
 ## Prerequisites
 
@@ -34,13 +47,15 @@ Before running this demo, you need to have the following installed:
 
 1.  Ensure the Ollama server is running and the `llama3` model is available.
 
-2.  Open the `prompt_demo.py` file and find the `demo_tactic` variable at the top.
+2.  Open either `prompt_demo.py` or `iterative_prompts.py` and modify the `demo_tactic` variable as needed to select the desired demo.
 
-3.  Set the `demo_tactic` variable to the number of the tactic you want to run (e.g., `demo_tactic = 6`).
-
-4.  Run the script from your terminal:
+3.  Run the script from your terminal:
     ```bash
     python3 prompt_demo.py
+    ```
+    or
+    ```bash
+    python3 iterative_prompts.py
     ```
 
 The output in your terminal will show the results of the chosen prompting tactic.
