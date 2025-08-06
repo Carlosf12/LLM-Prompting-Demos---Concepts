@@ -4,7 +4,7 @@ This repository contains a collection of Python scripts to demonstrate key princ
 
 ## Project Features
 
-* **Prompting Demos (`prompt_demo.py`)**: A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
+* **Prompting Demos (`guidelines_demo.py`)**: A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
     1.  **Using Delimiters**: Structuring prompts to clearly separate instructions from content.
     2.  **Structured Output**: Asking for responses in formats like JSON.
     3.  **Conditional Logic**: Guiding the model to perform actions based on conditions.
@@ -47,11 +47,11 @@ Before running this demo, you need to have the following installed:
 
 1.  Ensure the Ollama server is running and the `llama3` model is available.
 
-2.  Open either `prompt_demo.py` or `iterative_prompts.py` and modify the `demo_tactic` variable as needed to select the desired demo.
+2.  Open either **`guidelines_demo.py`** or `iterative_prompts.py` and modify the `demo_tactic` variable as needed to select the desired demo.
 
 3.  Run the script from your terminal:
     ```bash
-    python3 prompt_demo.py
+    python3 guidelines_demo.py
     ```
     or
     ```bash
