@@ -4,14 +4,14 @@ This repository contains a collection of Python scripts to demonstrate key princ
 
 ## Project Features
 
-* **Prompting Demos (`guidelines_demo.py`)**: A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
+* **Prompting Guidelines Demos (`guidelines_demo.py`)**: A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
     1.  **Using Delimiters**: Structuring prompts to clearly separate instructions from content.
     2.  **Structured Output**: Asking for responses in formats like JSON.
     3.  **Conditional Logic**: Guiding the model to perform actions based on conditions.
     4.  **Few-shot Prompting**: Providing examples to teach the model a desired style.
     5.  **Specifying Steps**: Breaking down complex tasks for the model.
     6.  **Working Out Solutions First**: Improving accuracy by having the model solve a problem before evaluating an answer.
-    7.  **Generating Marketing Copy**: Creating a product description from a technical fact sheet.
+    7.  **Generating Marketing Copy**: Creating a product description from a technical fact sheet and then refining the output with a word count constraint.
 
 * **Iterative Prompt Development (`iterative_prompts.py`)**: A dedicated script that demonstrates the process of iteratively refining a prompt to achieve a progressively better and more targeted output.
 
