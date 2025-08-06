@@ -2,6 +2,8 @@
 
 This repository contains a collection of Python scripts to demonstrate key principles and tactics for effective prompt engineering with Large Language Models (LLMs). The project is set up to use the Ollama framework to run a local `llama3` model, providing a self-contained and easy-to-use environment for learning.
 
+***
+
 ## Project Features
 
 * **Prompting Guidelines Demos (`guidelines_demo.py`)**: A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
@@ -11,9 +13,11 @@ This repository contains a collection of Python scripts to demonstrate key princ
     4.  **Few-shot Prompting**: Providing examples to teach the model a desired style.
     5.  **Specifying Steps**: Breaking down complex tasks for the model.
     6.  **Working Out Solutions First**: Improving accuracy by having the model solve a problem before evaluating an answer.
-    7.  **Generating Marketing Copy**: Creating a product description from a technical fact sheet and then refining the output with a word count constraint.
+    7.  **Generating Marketing Copy**: Creating a product description from a technical fact sheet and then refining the output with a word count constraint. This demo now includes enhanced terminal output using the **`rich`** library and saves a formatted HTML report.
 
 * **Iterative Prompt Development (`iterative_prompts.py`)**: A dedicated script that demonstrates the process of iteratively refining a prompt to achieve a progressively better and more targeted output.
+
+***
 
 ## Prerequisites
 
@@ -27,6 +31,8 @@ Before running this demo, you need to have the following installed:
     ollama pull llama3
     ```
 
+***
+
 ## Installation
 
 1.  Clone this repository:
@@ -39,9 +45,11 @@ Before running this demo, you need to have the following installed:
     ```bash
     pip install -r requirements.txt
     ```
-    (Note: You may need to create a `requirements.txt` file containing `openai` and `python-dotenv`).
+    (Note: You may need to create a `requirements.txt` file containing `openai`, `python-dotenv`, and **`rich`**).
 
 3.  Create a `.env` file in the project directory with your OpenAI API key (or leave it blank, as the script is configured to use Ollama's local API).
+
+***
 
 ## Usage
 
@@ -58,4 +66,4 @@ Before running this demo, you need to have the following installed:
     python3 iterative_prompts.py
     ```
 
-The output in your terminal will show the results of the chosen prompting tactic.
+The output in your terminal will show the results of the chosen prompting tactic. When running the `Generating Marketing Copy` demo, a file named `output.html` will also be created, which you can open in your browser to see a detailed, formatted report.
