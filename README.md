@@ -1,124 +1,41 @@
-Here's the content of your `README.md` file, presented in a plain text, organized format:
+LLM Prompting Demos & Concepts
+This repository offers Python scripts to demonstrate effective prompt engineering with Large Language Models (LLMs), utilizing Ollama and the local llama3 model for a self-contained learning environment.
 
-```text
-# LLM Prompting Demos & Concepts
+Features
+The project includes three main demo scripts:
 
-This repository contains a collection of Python scripts to demonstrate key principles and tactics for effective prompt engineering with Large Language Models (LLMs). The project is set up to use the Ollama framework to run a local `llama3` model, providing a self-contained and easy-to-use environment for learning.
+guidelines_demo.py: Showcases various prompting techniques like using delimiters, structured output (JSON), conditional logic, few-shot prompting, and specifying steps. It also features a marketing copy generation demo with rich terminal output and HTML reports.
 
----
+iterative_prompts.py: Focuses on refining prompts through an iterative development process.
 
-## Project Features
+transforming.py: Demonstrates text transformations including multi-language translation (simple, persona-based, formal/informal), language identification, tone transformation (slang to business), and JSON to HTML table conversion. It also includes a "Universal Translator" loop.
 
-* Prompting Guidelines Demos (`guidelines_demo.py`): A single script that showcases a variety of prompting techniques, which can be run by changing a `demo_tactic` variable. These tactics include:
+Setup
+Prerequisites
+You'll need:
 
-  1. Using Delimiters: Structuring prompts to clearly separate instructions from content.
+Python 3 and pip.
 
-  2. Structured Output: Asking for responses in formats like JSON.
+Ollama installed locally.
 
-  3. Conditional Logic: Guiding the model to perform actions based on conditions.
+The llama3 model pulled via Ollama: ollama pull llama3
 
-  4. Few-shot Prompting: Providing examples to teach the model a desired style.
+Installation
+Clone the repository.
 
-  5. Specifying Steps: Breaking down complex tasks for the model.
+Install Python dependencies: pip install -r requirements.txt (ensure requirements.txt includes openai, python-dotenv, and rich).
 
-  6. Working Out Solutions First: Improving accuracy by having the model solve a problem before evaluating an answer.
+Create a .env file for API keys (optional, as Ollama runs locally).
 
-  7. Generating Marketing Copy: Creating a product description from a technical fact sheet and then refining the output with a word count constraint. This demo now includes enhanced terminal output using the `rich` library and saves a formatted HTML report.
+Usage
+Ensure Ollama server is running and llama3 is available.
 
-* Iterative Prompt Development (`iterative_prompts.py`): A dedicated script that demonstrates the process of iteratively refining a prompt to achieve a progressively better and more targeted output.
+Run desired script from your terminal:
 
-* Transformation & Translation Demos (`transforming.py`): This script showcases the LLM's capabilities in transforming text, focusing on various translation tasks and tone adjustments. It demonstrates:
+python3 guidelines_demo.py
 
-  1. Simple English to Spanish Translation: Basic language translation.
-
-  2. Multi-language Translation with Persona: Translating text into multiple languages while adopting a specific persona.
-
-  3. Formal and Informal Translation: Adapting language to different formality levels.
-
-  4. Language Identification: Determining the source language of a given text.
-
-  5. Tone Transformation: Converting slang to a professional business tone.
-
-  6. Format Conversion: Transforming data from JSON to an HTML table.
-
-  7. Universal Translator: A loop demonstrating language identification and translation for multiple messages.
-
----
-
-## Prerequisites
-
-Before running this demo, you need to have the following installed:
-
-* Python 3: The script is written in Python.
-
-* pip: Python's package installer.
-
-* Ollama: A framework to run LLMs locally. You can download it from [ollama.ai](https://ollama.ai/).
-
-* llama3 model: Once Ollama is installed, open your terminal and pull the `llama3` model:
-
-```
-
-ollama pull llama3
-
-```
-
----
-
-## Installation
-
-1. Clone this repository:
-
-```
-
-git clone \<your-repo-url\>
-cd \<your-repo-directory\>
-
-```
-
-2. Install the required Python libraries:
-
-```
-
-pip install -r requirements.txt
-
-```
-
-(Note: You may need to create a `requirements.txt` file containing `openai`, `python-dotenv`, and `rich`).
-
-3. Create a `.env` file in the project directory with your OpenAI API key (or leave it blank, as the script is configured to use Ollama's local API).
-
----
-
-## Usage
-
-1. Ensure the Ollama server is running and the `llama3` model is available.
-
-2. Open either `guidelines_demo.py`, `iterative_prompts.py`, or `transforming.py` and modify the `demo_tactic` variable (if applicable) or run directly.
-
-3. Run the script from your terminal:
-
-```
-
-python3 guidelines\_demo.py
-
-```
-
-or
-
-```
-
-python3 iterative\_prompts.py
-
-```
-
-or
-
-```
+python3 iterative_prompts.py
 
 python3 transforming.py
 
-```
-
-The output in your terminal will show the results of the chosen prompting tactic. When running the `Generating Marketing Copy` demo, a file named `output.html` will also be created, which you can open in your browser to see a detailed, formatted report.
-```
+Output will appear in the terminal, and output.html will be generated for the marketing copy demo.
